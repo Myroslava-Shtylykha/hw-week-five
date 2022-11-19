@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import CurrentDate from "./CurrentDate";
 import "./Weather.css";
 import axios from "axios";
  
@@ -17,7 +18,7 @@ export default function Weather(props) {
       city: response.data.city,
       description: response.data.condition.description,
       iconUrl: response.data.condition.icon_url,
-      time: "Sunday, 9:00"
+      time: new Date(response.data.time * 1000)
     });
 
   }
@@ -41,13 +42,15 @@ export default function Weather(props) {
           </div>
         </form>
         <h1>{weatherData.city}</h1>
-        <div className="day_time">{weatherData.time} </div>
+        <div className="day_time">
+          <CurrentDate date={weatherData.time} />
+        </div>
         <img src={weatherData.iconUrl} alt={weatherData.description}></img>
         <ul>
           <li className="temperature">
             {Math.round(weatherData.temperature)}℃
           </li>
-          <li>Rain shower</li>
+          <li className="text-capitalize">{weatherData.description}</li>
           <li className="feels">
             Feels like {Math.round(weatherData.feels)} ℃
           </li>
