@@ -31,6 +31,7 @@ return (
         </div>
       </div>
     </div>
+    <hr />
   </div>
 );
 }
